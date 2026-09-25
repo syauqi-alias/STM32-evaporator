@@ -1,20 +1,33 @@
-Category,Part,Qty,Key Spec,Notes,Status
-Microcontroller,STM32 Nucleo-G474RE,1,170MHz Cortex-M4F; 3x 12-bit DAC; HRTIM; Zephyr board support,DAC removes need for external DAC for ITV1000 regulator,Suggested - not yet ordered
-Stepper motor,Sanyo Denki 103H5 Series Hybrid Stepper Motor,2,24V,,Decided
-Stepper driver,TMC2100 SilentStepStick,2,5.5-46V; run at 24V,STEP/DIR/EN to MCU; CFG pins set microstepping,Decided
-Analogue interface,Op-amp gain stage (e.g. MCP6002 or TLV2372),1 dual IC,Gain = 3; 0-3.3V to 0-10V; rail-to-rail output,Converts DAC output to ITV1000 0-10V input range,Suggested
-Analogue interface,Resistor divider (10k/20k),1,Steps down 1-5V monitor signal to under 3.3V,Protects MCU ADC pin from ITV1000 monitor output,Suggested
-Analogue interface,TVS diode + 100R series resistor,1 set,On op-amp output to ITV,Protection on signal line to regulator,Suggested
-Pneumatic regulator,SMC ITV1000 series Electro-Pneumatic Regulator,1,24V supply; 0-10V input variant recommended,Monitor output 1-5V or 4-20mA,Under consideration
-Heating element,RS PRO Cartridge Heater,2,200W 220-230V AC; 2in,,Decided
-Heater switching,Solid-state relay (SSR) zero-cross e.g. Omron G3NA-210B or Crydom D2425,2,10-25A; panel mount; heatsink required,Replaces Grove mechanical relay; needed for time-proportioning PID control,Suggested
-Heater protection,RS PRO Bi-Metallic Thermostat,2,Closes at 105C; 120C max; NC; automatic reset; 16A,Wired in series after SSR as hardware backup cutoff,Decided
-Heater protection,Fuse,2,2A,One per heater channel,Suggested
-Temperature sensing,RS PRO Type J Grounded Thermocouple,1,60-350C max; 13mm length; 3.18mm diameter,Grounded type - needs single ground point with earthed block,Decided
-Temperature sensing,MAX31856 Thermocouple-to-Digital Converter,1,SPI; supports Type J; built-in cold-junction compensation,Zephyr driver available,Suggested
-Display,SSD1306 128x64 OLED (I2C) or ST7789/ILI9341 TFT (SPI),1,3.3V,OLED for status only; TFT if graphing needed; use SPI not I2C for TFT,Undecided
-Power supply,Mean Well LRS-150-24,1,24V DC; approx 6.5A,Covers steppers + ITV1000 + op-amp rail,Suggested
-Power supply,5V buck converter,1,Steps 24V down to 5V for MCU/logic,,Suggested
-Power supply,12V DC 30A PSU,1,Existing bench unit,Prototyping only - will limit stepper speed,Existing/prototyping
-Safety,Emergency stop button,1,2x NC contacts (mains + 24V rail) + 1x aux contact for MCU GPIO status,Mushroom-head latching type recommended,Undecided
-Input,Micro switch,4,NC; wired to GPIO with pull-up,Zephyr gpio-keys driver handles debounce,Decided
+#,Component,Pin type,Pin,Power,Interface,MCU pin
+1,TMC2100 SilentStepStick,Motor Output,M1A,,,
+,,,M1B,,,
+,,,M2A,,,
+,,,M2B,,,
+,,Power supply,GND,,,
+,,,"VM, Motor Supply Voltage (5.5-46V)",24V,,
+,,,"VIO, Logic supply Voltage (3.3V-5V or 5V)",3.3V or 5V,,
+,,Motor Control,"STP, step pulses",,PWM,
+,,,"DIR, direction",,LOW or HIGH,
+,,Configuration pin,"CFG0, Chopper off time settings",,,
+,,,"CFG1, Microstep resolution",,,
+,,,"CFG2, Microstep resolution (interpolation)",,,
+,,,"CFG3, Current settings",,,
+,,,"CFG4, SETS CHOPPER HYSTERESIS",,,
+,,,"CFG5, SETS CHOPPER BLANK TIME",,,
+,,,"CFG6, Driver enable ",,,
+2,TMC2100 SilentStepStick,Motor Output,M1A,,,
+,,,M1B,,,
+,,,M2A,,,
+,,,M2B,,,
+,,Power supply,GND,,,
+,,,"VM, Motor Supply Voltage (5.5-46V)",24V,,
+,,,"VIO, Logic supply Voltage (3.3V-5V or 5V)",3.3V or 5V,,
+,,Motor Control,"STP, step pulses",,PWM,
+,,,"DIR, direction",,LOW or HIGH,
+,,Configuration pin,"CFG0, Chopper off time settings",,,
+,,,"CFG1, Microstep resolution",,,
+,,,"CFG2, Microstep resolution (interpolation)",,,
+,,,"CFG3, Current settings",,,
+,,,"CFG4, SETS CHOPPER HYSTERESIS",,,
+,,,"CFG5, SETS CHOPPER BLANK TIME",,,
+,,,"CFG6, Driver enable ",,,
